@@ -1,13 +1,32 @@
 package com.tigratius.ticketoffice.model;
 
-import java.util.HashMap;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "flights")
 public class Flight extends BaseEntity {
 
+    @ManyToOne
+    @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
+    @ManyToOne
+    @JoinColumn(name = "route_id")
     private Route route;
 
-    private HashMap<SeatType, Integer> seatOccupiedMap = new HashMap<>();
+    //
+    /*private HashMap<SeatType, Integer> seatOccupiedMap = new HashMap<>();*/
+
+    /**
+     * Default Constructor
+     */
+
+    public Flight() {
+    }
+
+    /**
+     * Getters and Setters
+     */
 
     public Aircraft getAircraft() {
         return aircraft;
@@ -27,7 +46,7 @@ public class Flight extends BaseEntity {
 
     /*OccupiedSeats*/
 
-    public void setSeatOccupiedMap(HashMap<SeatType, Integer> seatOccupiedMap) {
+   /* public void setSeatOccupiedMap(HashMap<SeatType, Integer> seatOccupiedMap) {
         this.seatOccupiedMap = seatOccupiedMap;
     }
 
@@ -58,5 +77,5 @@ public class Flight extends BaseEntity {
     {
         int occupiedSeats = getOccupiedSeatsBySeatType(seatType);
         seatOccupiedMap.put(seatType, occupiedSeats - 1);
-    }
+    }*/
 }

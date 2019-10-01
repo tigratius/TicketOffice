@@ -5,7 +5,7 @@ import com.tigratius.ticketoffice.model.Route;
 import com.tigratius.ticketoffice.repository.CityRepository;
 import com.tigratius.ticketoffice.repository.RouteRepository;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class RouteService {

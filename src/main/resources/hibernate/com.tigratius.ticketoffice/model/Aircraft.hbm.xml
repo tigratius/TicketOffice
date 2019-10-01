@@ -1,0 +1,31 @@
+<!--
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.tigratius.ticketoffice.model.Aircraft" table="aircrafts">
+        <id name="id" type="long" column="id">
+            <generator class="native" />
+        </id>
+        <property name="name" type="string" column="name"/>
+        <map name="seatNumberMap" cascade="all" lazy="false">
+            <key column="aircraft_id"/>
+            <index column="seat_type" type="string"/>
+            <one-to-many class="com.tigratius.ticketoffice.model.AircraftSeatAmount"/>
+        </map>
+        &lt;!&ndash;<map name="seatNumberMap" cascade="all" lazy="false">
+            <key column="aircraft_id"/>
+            <index column="seat_type" type="org.hibernate.type.EnumType"/>
+            <one-to-many class="com.tigratius.ticketoffice.model.AircraftSeatAmount"/>
+        </map>&ndash;&gt;
+
+    </class>
+
+    <class name = "com.tigratius.ticketoffice.model.AircraftSeatAmount" table = "aircraftseatamounts">
+        <id name = "id" type = "long" column = "id">
+            <generator class="native"/>
+        </id>
+        <property name = "amount" column = "amount" type = "int"/>
+    </class>
+</hibernate-mapping>-->

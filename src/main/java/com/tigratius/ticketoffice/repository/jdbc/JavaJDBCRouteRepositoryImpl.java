@@ -1,15 +1,13 @@
-package com.tigratius.ticketoffice.repository.dao;
+package com.tigratius.ticketoffice.repository.jdbc;
 
 import com.tigratius.ticketoffice.model.*;
 import com.tigratius.ticketoffice.repository.CityRepository;
 import com.tigratius.ticketoffice.repository.RouteRepository;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.sql.Date;
 
-public class JavaDAORouteRepositoryImpl extends RouteRepository {
+public class JavaJDBCRouteRepositoryImpl extends JDBCBaseRepository<Route> implements RouteRepository {
 
     private CityRepository cityRepository;
     private final String sqlQueryGetAll = "select * from routes";
@@ -20,7 +18,7 @@ public class JavaDAORouteRepositoryImpl extends RouteRepository {
 
     private final Class<Route> aClass = Route.class;
 
-    public JavaDAORouteRepositoryImpl(Connection connection, CityRepository cityRepository) {
+    public JavaJDBCRouteRepositoryImpl(Connection connection, CityRepository cityRepository) {
 
         this.cityRepository = cityRepository;
         super.connection = connection;
@@ -50,9 +48,9 @@ public class JavaDAORouteRepositoryImpl extends RouteRepository {
     protected void parse(Route route, ResultSet rs) throws Exception {
         route.setId(rs.getLong("id"));
         Long cityDepartureId = rs.getLong("departure_city_id");
-        Date departureDate = rs.getDate("departure_date");
+        Timestamp departureDate = rs.getTimestamp("departure_date");
         Long cityArrivalId = rs.getLong("arrival_city_id");
-        Date arrivalDate = rs.getDate("arrival_date");
+        Timestamp arrivalDate = rs.getTimestamp("arrival_date");
 
         route.setDeparture(cityRepository.getById(cityDepartureId));
         route.setDepartureDate(departureDate);
@@ -63,9 +61,9 @@ public class JavaDAORouteRepositoryImpl extends RouteRepository {
     @Override
     protected void prepareAddStatement(Route item, PreparedStatement preparedStatement) throws Exception {
         preparedStatement.setLong(1, item.getDeparture().getId());
-        preparedStatement.setDate(2, item.getDepartureDate());
+        preparedStatement.setTimestamp(2, new Timestamp(item.getDepartureDate().getTime()));
         preparedStatement.setLong(3, item.getArrival().getId());
-        preparedStatement.setDate(4, item.getDepartureDate());
+        preparedStatement.setTimestamp(4, new Timestamp(item.getArrivalDate().getTime()));
     }
 
     @Override

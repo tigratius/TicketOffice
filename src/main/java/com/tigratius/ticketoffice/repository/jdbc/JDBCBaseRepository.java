@@ -1,4 +1,4 @@
-package com.tigratius.ticketoffice.repository;
+package com.tigratius.ticketoffice.repository.jdbc;
 
 import com.tigratius.ticketoffice.model.Message;
 
@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseRepository<T> implements GenericRepository<T, Long>{
+public abstract class JDBCBaseRepository<T> /*implements GenericRepository<T, Long>*/{
 
     protected String sqlQueryDeleteById;
     protected String sqlQueryGetById;
@@ -15,7 +15,6 @@ public abstract class BaseRepository<T> implements GenericRepository<T, Long>{
     protected String sqlQueryUpdateById;
     protected Connection connection;
 
-    @Override
     public void update(T item) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQueryUpdateById);
@@ -27,7 +26,6 @@ public abstract class BaseRepository<T> implements GenericRepository<T, Long>{
         }
     }
 
-    @Override
     public void add(T item) {
         try {
             PreparedStatement preparedStatement = connection
@@ -61,7 +59,6 @@ public abstract class BaseRepository<T> implements GenericRepository<T, Long>{
         return items;
     }
 
-    @Override
     public void delete(Long id) {
         try {
 
@@ -76,7 +73,7 @@ public abstract class BaseRepository<T> implements GenericRepository<T, Long>{
         }
     }
 
-    protected T getById(Long id, Class<T> cls) throws Exception {
+   protected T getById(Long id, Class<T> cls) throws Exception {
 
         T item = cls.newInstance();
 

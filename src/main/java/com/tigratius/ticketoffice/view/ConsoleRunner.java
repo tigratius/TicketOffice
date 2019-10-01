@@ -3,9 +3,13 @@ package com.tigratius.ticketoffice.view;
 import com.tigratius.ticketoffice.controller.*;
 import com.tigratius.ticketoffice.model.Message;
 import com.tigratius.ticketoffice.repository.*;
+import com.tigratius.ticketoffice.repository.hibernate.*;
 import com.tigratius.ticketoffice.service.*;
 import com.tigratius.ticketoffice.util.DbUtil;
-import com.tigratius.ticketoffice.repository.dao.*;
+import com.tigratius.ticketoffice.repository.jdbc.*;
+import com.tigratius.ticketoffice.util.HibernateUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -35,14 +39,23 @@ public class ConsoleRunner {
 
     public ConsoleRunner() {
         try {
-            //create repo
+            //create repo using jdbc
             Connection connection = DbUtil.getConnection();
-            CityRepository cityRepository = new JavaDAOCityRepositoryImpl(connection);
-            AircraftRepository aircraftRepository = new JavaDAOAirCraftRepositoryImpl(connection);
-            PassengerRepository passengerRepository = new JavaDAOPassengerRepositoryImpl(connection);
-            RouteRepository routeRepository = new JavaDAORouteRepositoryImpl(connection, cityRepository);
-            FlightRepository flightRepository = new JavaDAOFlightRepositoryImpl(connection, aircraftRepository, routeRepository);
-            TicketRepository ticketRepository = new JavaDAOTicketRepositoryImpl(connection, flightRepository, passengerRepository);
+            CityRepository cityRepository = new JavaJDBCCityRepositoryImpl(connection);
+            AircraftRepository aircraftRepository = new JavaJDBCAirCraftRepositoryImpl(connection);
+            PassengerRepository passengerRepository = new JavaJDBCPassengerRepositoryImpl(connection);
+            RouteRepository routeRepository = new JavaJDBCRouteRepositoryImpl(connection, cityRepository);
+            FlightRepository flightRepository = new JavaJDBCFlightRepositoryImpl(connection, aircraftRepository, routeRepository);
+            TicketRepository ticketRepository = new JavaJDBCTicketRepositoryImpl(connection, flightRepository, passengerRepository);
+
+            //create repo using hibernate
+            /*SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            CityRepository cityRepository = new JavaHibernateCityRepositoryImpl(sessionFactory);
+            AircraftRepository aircraftRepository = new JavaHibernateAircraftRepositoryImpl(sessionFactory);
+            PassengerRepository passengerRepository = new JavaHibernatePassengerRepositoryImpl(sessionFactory);
+            RouteRepository routeRepository = new JavaHibernateRouteRepositoryImpl(sessionFactory);
+            FlightRepository flightRepository = new JavaHibernateFlightRepositoryImpl(sessionFactory);
+            TicketRepository ticketRepository = new JavaHibernateTicketRepositoryImpl(sessionFactory);*/
 
             //create services
             FlightService flightService = new FlightService(flightRepository, aircraftRepository, routeRepository);
@@ -111,7 +124,8 @@ public class ConsoleRunner {
 
         try {
             DbUtil.getConnection().close();
-        } catch (SQLException e) {
+            /*HibernateUtil.getSessionFactory().close();*/
+        } catch (SQLException | HibernateException e) {
             e.printStackTrace();
         }
     }

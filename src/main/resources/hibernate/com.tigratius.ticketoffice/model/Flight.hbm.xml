@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.tigratius.ticketoffice.model.Flight" table="flights">
+        <id name="id" type="long" column="id">
+            <generator class="native" />
+        </id>
+        <!--<many-to-one name="departure" column="departure_city_id" not-null="true"
+                     class="com.tigratius.ticketoffice.model.City" lazy="false"/>
+        <property name="departureDate" type="date" column="departure_date"/>
+        <many-to-one name="arrival" column="arrival_city_id" not-null="true"
+                     class="com.tigratius.ticketoffice.model.City" lazy="false"/>
+        <property name="arrivalDate" type="date" column="arrival_date"/>-->
+    </class>
+</hibernate-mapping>

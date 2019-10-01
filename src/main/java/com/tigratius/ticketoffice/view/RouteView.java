@@ -5,8 +5,11 @@ import com.tigratius.ticketoffice.model.BaseEntity;
 import com.tigratius.ticketoffice.model.Message;
 import com.tigratius.ticketoffice.model.Route;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,9 +36,11 @@ class RouteView extends BaseView {
             Message.ID.getMessage();
 
     private final String inputDepartureCityIdMessage = "Введите ID номер города вылета:";
-    private final String inputDepartureDateMessage = "Введите дату вылета в формате yyyy-MM-dd:";
+    private final String inputDepartureDateMessage = "Введите дату вылета в формате yyyy-MM-dd_HH:mm :";
     private final String inputArrivalCityIdMessage = "Введите ID номер города прилета:";
-    private final String inputArrivalDateMessage = "Введите дату прилета в формате yyyy-MM-dd:";
+    private final String inputArrivalDateMessage = "Введите дату прилета в формате yyyy-MM-dd_HH:mm :";
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 
     RouteView(RouteController routeController, Scanner sc) {
         this.routeController = routeController;
@@ -55,8 +60,9 @@ class RouteView extends BaseView {
         Long arrivalCityId = sc.nextLong();
         System.out.println(inputArrivalDateMessage);
         String arrivalDate = sc.next();
+
         try {
-            routeController.create(departureCityId, Date.valueOf(departureDate), arrivalCityId, Date.valueOf(arrivalDate));
+            routeController.create(departureCityId, dateFormat.parse(departureDate), arrivalCityId, dateFormat.parse(arrivalDate));
             System.out.println(Message.SUCCESSFUL_OPERATION.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -78,8 +84,9 @@ class RouteView extends BaseView {
         Long arrivalCityId = sc.nextLong();
         System.out.println(inputArrivalDateMessage);
         String arrivalDate = sc.next();
+
         try {
-            routeController.update(id, departureCityId, Date.valueOf(departureDate), arrivalCityId, Date.valueOf(arrivalDate));
+            routeController.update(id, departureCityId, dateFormat.parse(departureDate), arrivalCityId, dateFormat.parse(arrivalDate));
             System.out.println(Message.SUCCESSFUL_OPERATION.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());

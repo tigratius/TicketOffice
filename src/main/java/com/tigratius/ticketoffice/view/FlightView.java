@@ -20,7 +20,7 @@ class FlightView extends BaseView{
             " 5. Выход";
 
     private final String headerFlights = "Доступные рейсы\n" +
-            "ID; AIRCRAFT_NAME; DEPARTURE_DATE; DEPARTURE_CITY; ARRIVAL_DATE; ARRIVAL_CITY; BUSINESS_FREE_SEATS; ECONOMY_FREE_SEATS";
+            "ID; AIRCRAFT_NAME; DEPARTURE_DATE; DEPARTURE_CITY; ARRIVAL_DATE; ARRIVAL_CITY;";
 
     private final String createMenuMessage = "Создание рейса.";
 
@@ -157,9 +157,7 @@ class FlightView extends BaseView{
                 Route route = f.getRoute();
 
                 System.out.println(f.getId() + "; " + aircraft.getName() + "; " + dateFormat.format(route.getDepartureDate()) + "; " + route.getDeparture().getName() + "; "
-                        + dateFormat.format(route.getArrivalDate()) + "; " + route.getArrival().getName() + "; "
-                        + f.getFreeSeatsBySeatType(SeatType.BUSINESS) + "; "
-                        + f.getFreeSeatsBySeatType(SeatType.ECONOMY));
+                        + dateFormat.format(route.getArrivalDate()) + "; " + route.getArrival().getName());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

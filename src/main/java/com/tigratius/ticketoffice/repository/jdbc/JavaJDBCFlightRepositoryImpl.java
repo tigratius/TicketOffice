@@ -1,4 +1,4 @@
-package com.tigratius.ticketoffice.repository.dao;
+package com.tigratius.ticketoffice.repository.jdbc;
 
 import com.tigratius.ticketoffice.model.*;
 import com.tigratius.ticketoffice.repository.AircraftRepository;
@@ -8,7 +8,7 @@ import com.tigratius.ticketoffice.repository.RouteRepository;
 import java.util.*;
 import java.sql.*;
 
-public class JavaDAOFlightRepositoryImpl extends FlightRepository {
+public class JavaJDBCFlightRepositoryImpl extends JDBCBaseRepository<Flight> implements FlightRepository {
 
     private AircraftRepository aircraftRepository;
     private RouteRepository routeRepository;
@@ -16,12 +16,12 @@ public class JavaDAOFlightRepositoryImpl extends FlightRepository {
     private final String sqlQueryGetAll = "select * from flights";
     private final String sqlQueryGetById = "select * from flights where id=?";
     private final String sqlQueryDeleteById = "delete from flights where id=?";
-    private final String sqlQueryUpdateById = "update flights set aircraft_id=?, route_id=?, business_seat_occupied_amount=?, economy_seat_occupied_amount=? where id=?";
-    private final String sqlQueryInsert = "insert into flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (?, ?, ?, ?)";
+    private final String sqlQueryUpdateById = "update flights set aircraft_id=?, route_id=? where id=?";
+    private final String sqlQueryInsert = "insert into flights (aircraft_id, route_id) values (?, ?)";
 
     private final Class<Flight> aClass = Flight.class;
 
-    public JavaDAOFlightRepositoryImpl(Connection connection, AircraftRepository aircraftRepository, RouteRepository routeRepository) {
+    public JavaJDBCFlightRepositoryImpl(Connection connection, AircraftRepository aircraftRepository, RouteRepository routeRepository) {
         this.aircraftRepository = aircraftRepository;
         this.routeRepository = routeRepository;
         super.connection = connection;
@@ -47,23 +47,17 @@ public class JavaDAOFlightRepositoryImpl extends FlightRepository {
         flight.setId(rs.getLong("id"));
         flight.setAircraft(aircraftRepository.getById(rs.getLong("aircraft_id")));
         flight.setRoute(routeRepository.getById(rs.getLong("route_id")));
-        HashMap<SeatType, Integer> seatOccupiedMap = new HashMap<>();
-        seatOccupiedMap.put(SeatType.BUSINESS, rs.getInt("business_seat_occupied_amount"));
-        seatOccupiedMap.put(SeatType.ECONOMY, rs.getInt("economy_seat_occupied_amount"));
-        flight.setSeatOccupiedMap(seatOccupiedMap);
     }
 
     @Override
     protected void prepareAddStatement(Flight item, PreparedStatement preparedStatement) throws Exception {
         preparedStatement.setLong(1, item.getAircraft().getId());
         preparedStatement.setLong(2, item.getRoute().getId());
-        preparedStatement.setInt(3, item.getOccupiedSeatsBySeatType(SeatType.BUSINESS));
-        preparedStatement.setInt(4, item.getOccupiedSeatsBySeatType(SeatType.ECONOMY));
     }
 
     @Override
     protected void prepareUpdateStatement(Flight item, PreparedStatement preparedStatement) throws Exception {
         prepareAddStatement(item, preparedStatement);
-        preparedStatement.setLong(5, item.getId());
+        preparedStatement.setLong(3, item.getId());
     }
 }

@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-class AirCraftView extends BaseView{
+class AirCraftView extends BaseView {
 
     private AirCraftController airCraftController;
 
@@ -51,9 +51,7 @@ class AirCraftView extends BaseView{
         try {
             airCraftController.create(name, busSeatAmount, ecoSeatAmount);
             System.out.println(Message.SUCCESSFUL_OPERATION.getMessage());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(Message.ERROR_OPERATION.getMessage());
         }
@@ -74,9 +72,7 @@ class AirCraftView extends BaseView{
         try {
             airCraftController.update(id, name, busSeatAmount, ecoSeatAmount);
             System.out.println(Message.SUCCESSFUL_OPERATION.getMessage());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(Message.ERROR_OPERATION.getMessage());
         }
@@ -92,9 +88,7 @@ class AirCraftView extends BaseView{
         try {
             airCraftController.delete(id);
             System.out.println(Message.SUCCESSFUL_OPERATION.getMessage());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(Message.ERROR_OPERATION.getMessage());
         }
@@ -119,6 +113,7 @@ class AirCraftView extends BaseView{
             for (Aircraft aircraft : aircrafts
             ) {
                 System.out.println(aircraft.getId() + "; " + aircraft.getName() + "; " +
+//                        aircraft.getNumberSeatsBySeatType(SeatType.BUSINESS + "") + "; " + aircraft.getNumberSeatsBySeatType(SeatType.ECONOMY + ""));
                         aircraft.getNumberSeatsBySeatType(SeatType.BUSINESS) + "; " + aircraft.getNumberSeatsBySeatType(SeatType.ECONOMY));
             }
         } catch (Exception e) {

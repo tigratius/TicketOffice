@@ -1,8 +1,30 @@
 package com.tigratius.ticketoffice.model;
 
-import java.util.HashMap;
+import javax.persistence.*;
+import java.util.Map;
 
-public class Aircraft extends BaseEntity{
+@Entity
+@Table(name = "aircrafts")
+public class Aircraft extends BaseEntity {
+
+    private String name;
+
+    @MapKeyColumn(name = "seat_type")
+    @MapKeyEnumerated(EnumType.STRING)
+    @JoinColumn(name = "aircraft_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Map<SeatType, AircraftSeatAmount> seatNumberMap;
+
+    /**
+     * Default Constructor
+     */
+
+    public Aircraft() {
+    }
+
+    /**
+     * Getters and Setters
+     */
 
     public String getName() {
         return name;
@@ -12,26 +34,15 @@ public class Aircraft extends BaseEntity{
         this.name = name;
     }
 
-    private String name;
-
-    /*public HashMap<SeatType, Integer> getSeatNumberMap() {
+    public Map<SeatType, AircraftSeatAmount> getSeatNumberMap() {
         return seatNumberMap;
-    }*/
+    }
 
-    public void setSeatNumberMap(HashMap<SeatType, Integer> seatNumberMap) {
+    public void setSeatNumberMap(Map<SeatType, AircraftSeatAmount> seatNumberMap) {
         this.seatNumberMap = seatNumberMap;
     }
 
-    private HashMap<SeatType, Integer> seatNumberMap = new HashMap<>();
-
-    public int getNumberSeatsBySeatType(SeatType seatType)
-    {
-
-        return seatNumberMap.get(seatType);
+    public int getNumberSeatsBySeatType(SeatType seatType) {
+        return seatNumberMap.get(seatType).getAmount();
     }
-
-    /*public int getTotalSeats()
-    {
-        return seatNumberMap.get(SeatType.BUSINESS) + seatNumberMap.get(SeatType.ECONOMY);
-    }*/
 }

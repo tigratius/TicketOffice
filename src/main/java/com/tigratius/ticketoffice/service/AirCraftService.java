@@ -1,11 +1,13 @@
 package com.tigratius.ticketoffice.service;
 
 import com.tigratius.ticketoffice.model.Aircraft;
+import com.tigratius.ticketoffice.model.AircraftSeatAmount;
 import com.tigratius.ticketoffice.model.SeatType;
 import com.tigratius.ticketoffice.repository.AircraftRepository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AirCraftService {
 
@@ -38,9 +40,12 @@ public class AirCraftService {
     private Aircraft getAircraft(String name, int busSeatAmount, int ecoSeatAmount) {
         Aircraft aircraft = new Aircraft();
         aircraft.setName(name);
-        HashMap<SeatType, Integer> seatNumberMap = new HashMap<>();
-        seatNumberMap.put(SeatType.BUSINESS, busSeatAmount);
-        seatNumberMap.put(SeatType.ECONOMY, ecoSeatAmount);
+        /*Map<String, AircraftSeatAmount> seatNumberMap = new HashMap<>();
+        seatNumberMap.put(SeatType.BUSINESS + "", new AircraftSeatAmount(busSeatAmount));
+        seatNumberMap.put(SeatType.ECONOMY + "", new AircraftSeatAmount(ecoSeatAmount));*/
+        Map<SeatType, AircraftSeatAmount> seatNumberMap = new HashMap<>();
+        seatNumberMap.put(SeatType.BUSINESS, new AircraftSeatAmount(busSeatAmount));
+        seatNumberMap.put(SeatType.ECONOMY, new AircraftSeatAmount(ecoSeatAmount));
         aircraft.setSeatNumberMap(seatNumberMap);
         return aircraft;
     }

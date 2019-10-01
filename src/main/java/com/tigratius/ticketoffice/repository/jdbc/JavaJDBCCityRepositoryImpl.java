@@ -1,4 +1,4 @@
-package com.tigratius.ticketoffice.repository.dao;
+package com.tigratius.ticketoffice.repository.jdbc;
 
 import com.tigratius.ticketoffice.model.City;
 import com.tigratius.ticketoffice.repository.CityRepository;
@@ -6,7 +6,7 @@ import com.tigratius.ticketoffice.repository.CityRepository;
 import java.sql.*;
 import java.util.List;
 
-public class JavaDAOCityRepositoryImpl extends CityRepository {
+public class JavaJDBCCityRepositoryImpl extends JDBCBaseRepository<City> implements CityRepository {
 
     private final String sqlQueryGetAll = "select * from cities";
     private final String sqlQueryGetById = "select * from cities where id=?";
@@ -16,7 +16,7 @@ public class JavaDAOCityRepositoryImpl extends CityRepository {
 
     private final Class<City> aClass = City.class;
 
-    public JavaDAOCityRepositoryImpl(Connection connection) {
+    public JavaJDBCCityRepositoryImpl(Connection connection) {
         super.connection = connection;
         super.sqlQueryDeleteById = sqlQueryDeleteById;
         super.sqlQueryGetById = sqlQueryGetById;

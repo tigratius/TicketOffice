@@ -9,7 +9,7 @@ public class DbUtil {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost/ticketoffice?characterEncoding=UTF-8&useUnicode=true";
     private static final String USER = "root";
-    private static final String PASSWORD = "test123456";
+    private static final String PASSWORD = "Test123";
 
     private static Connection connection = null;
 

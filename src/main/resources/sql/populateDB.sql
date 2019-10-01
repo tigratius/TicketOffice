@@ -9,8 +9,14 @@ INSERT INTO cities (name) values ('Kiev');
 INSERT INTO cities (name) values ('London');
 
 /*Populate aircrafts*/
-INSERT INTO aircrafts (name, business_seat_amount, economy_seat_amount) values ('Boeing737', 20, 100);
-INSERT INTO aircrafts (name, business_seat_amount, economy_seat_amount) values ('Boeing730', 10, 90);
+INSERT INTO aircrafts (name) values ('Boeing737');
+INSERT INTO aircrafts (name) values ('Boeing730');
+
+/*Populate aircraftseatamounts*/
+INSERT INTO aircraftseatamounts (aircraft_id, seat_type, amount) values (1, 'BUSINESS', 20);
+INSERT INTO aircraftseatamounts (aircraft_id, seat_type, amount) values (1, 'ECONOMY', 100);
+INSERT INTO aircraftseatamounts (aircraft_id, seat_type, amount) values (2, 'BUSINESS', 10);
+INSERT INTO aircraftseatamounts (aircraft_id, seat_type, amount) values (2, 'ECONOMY', 90);
 
 /*Populate passengers*/
 INSERT INTO passengers (first_name, last_name, birth_date) values ('Alex', 'Andreev', '1986-04-11');
@@ -40,18 +46,18 @@ INSERT INTO routes (departure_city_id, departure_date, arrival_city_id, arrival_
 INSERT INTO routes (departure_city_id, departure_date, arrival_city_id, arrival_date) values (1, '2019-08-07 08:00:00', 2, '2019-08-07 12:00:00');
 
 /*Populate flights*/
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 1, 1, 2);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 2, 0, 2);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 3, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 4, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 5, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 6, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 7, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 8, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 9, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 10, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 11, 0, 1);
-INSERT INTO flights (aircraft_id, route_id, business_seat_occupied_amount, economy_seat_occupied_amount) values (1, 12, 0, 1);
+INSERT INTO flights (aircraft_id, route_id) values (1, 1);
+INSERT INTO flights (aircraft_id, route_id) values (1, 2);
+INSERT INTO flights (aircraft_id, route_id) values (1, 3);
+INSERT INTO flights (aircraft_id, route_id) values (1, 4);
+INSERT INTO flights (aircraft_id, route_id) values (1, 5);
+INSERT INTO flights (aircraft_id, route_id) values (1, 6);
+INSERT INTO flights (aircraft_id, route_id) values (1, 7);
+INSERT INTO flights (aircraft_id, route_id) values (1, 8);
+INSERT INTO flights (aircraft_id, route_id) values (1, 9);
+INSERT INTO flights (aircraft_id, route_id) values (1, 10);
+INSERT INTO flights (aircraft_id, route_id) values (1, 11);
+INSERT INTO flights (aircraft_id, route_id) values (1, 12);
 
 /*Populate tickets*/
 INSERT INTO tickets (flight_id, passenger_id, seat_type, price) values (1, 1, 'BUSINESS', 20000);

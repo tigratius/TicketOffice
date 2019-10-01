@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.tigratius.ticketoffice.model.Ticket" table="tickets">
+        <id name="id" type="long" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="flight" column="flight_id" not-null="true"
+                     class="com.tigratius.ticketoffice.model.Flight" lazy="false"/>
+        <many-to-one name="passenger" column="passenger_id" not-null="true"
+                     class="com.tigratius.ticketoffice.model.Passenger" lazy="false"/>
+        <!--<property name="seatType" type="org.hibernate.type.EnumType" column="seat_type"/>-->
+        <property name="seatType" column="seat_type">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.tigratius.ticketoffice.model.SeatType</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+        <property name="price" type="double" column="price"/>
+    </class>
+</hibernate-mapping>

@@ -1,4 +1,4 @@
-package com.tigratius.ticketoffice.repository.dao;
+package com.tigratius.ticketoffice.repository.jdbc;
 
 import com.tigratius.ticketoffice.model.Passenger;
 import com.tigratius.ticketoffice.repository.PassengerRepository;
@@ -6,7 +6,7 @@ import com.tigratius.ticketoffice.repository.PassengerRepository;
 import java.sql.*;
 import java.util.List;
 
-public class JavaDAOPassengerRepositoryImpl extends PassengerRepository {
+public class JavaJDBCPassengerRepositoryImpl extends JDBCBaseRepository<Passenger> implements PassengerRepository {
 
     private final String sqlQueryGetAll = "select * from passengers";
     private final String sqlQueryGetById = "select * from passengers where id=?";
@@ -16,7 +16,7 @@ public class JavaDAOPassengerRepositoryImpl extends PassengerRepository {
 
     private final Class<Passenger> aClass = Passenger.class;
 
-    public JavaDAOPassengerRepositoryImpl(Connection connection) {
+    public JavaJDBCPassengerRepositoryImpl(Connection connection) {
         super.connection = connection;
         super.sqlQueryDeleteById = sqlQueryDeleteById;
         super.sqlQueryGetById = sqlQueryGetById;

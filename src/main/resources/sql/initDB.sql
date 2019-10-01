@@ -7,9 +7,15 @@ CREATE TABLE cities (
 
 CREATE TABLE aircrafts (
     id INTEGER AUTO_INCREMENT PRIMARY KEY, 
-    name VARCHAR(30) NOT NULL, 
-    business_seat_amount INTEGER NOT NULL,
-    economy_seat_amount INTEGER NOT NULL
+    name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE aircraftseatamounts (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY, 
+    aircraft_id INTEGER DEFAULT NULL,
+    seat_type VARCHAR(8) DEFAULT NULL,
+    amount INTEGER DEFAULT NULL,
+    CONSTRAINT `FK_aircraftseatamounts_aircrafts` FOREIGN KEY (`aircraft_id`) REFERENCES `aircrafts` (`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE passengers (
@@ -33,8 +39,6 @@ CREATE TABLE flights (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     aircraft_id INTEGER NOT NULL,
     route_id INTEGER NOT NULL,
-    business_seat_occupied_amount INTEGER NOT NULL,
-    economy_seat_occupied_amount INTEGER NOT NULL,
     CONSTRAINT `FK_flights_aircrafts` FOREIGN KEY (`aircraft_id`) REFERENCES `aircrafts` (`id`) ON DELETE CASCADE,
 	CONSTRAINT `FK_flights_routes` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE
     );

@@ -3,7 +3,7 @@ package com.tigratius.ticketoffice.controller;
 import com.tigratius.ticketoffice.model.Route;
 import com.tigratius.ticketoffice.service.RouteService;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class RouteController {

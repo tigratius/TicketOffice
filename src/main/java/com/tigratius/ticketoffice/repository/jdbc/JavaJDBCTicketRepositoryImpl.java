@@ -1,4 +1,4 @@
-package com.tigratius.ticketoffice.repository.dao;
+package com.tigratius.ticketoffice.repository.jdbc;
 
 import com.tigratius.ticketoffice.model.*;
 import com.tigratius.ticketoffice.repository.FlightRepository;
@@ -8,7 +8,7 @@ import com.tigratius.ticketoffice.repository.TicketRepository;
 import java.sql.*;
 import java.util.*;
 
-public class JavaDAOTicketRepositoryImpl extends TicketRepository {
+public class JavaJDBCTicketRepositoryImpl extends JDBCBaseRepository<Ticket> implements TicketRepository {
 
     private FlightRepository flightRepository;
     private PassengerRepository passengerRepository;
@@ -21,7 +21,7 @@ public class JavaDAOTicketRepositoryImpl extends TicketRepository {
 
     private final Class<Ticket> aClass = Ticket.class;
 
-    public JavaDAOTicketRepositoryImpl(Connection connection, FlightRepository flightRepository, PassengerRepository passengerRepository) {
+    public JavaJDBCTicketRepositoryImpl(Connection connection, FlightRepository flightRepository, PassengerRepository passengerRepository) {
 
         this.flightRepository = flightRepository;
         this.passengerRepository = passengerRepository;
