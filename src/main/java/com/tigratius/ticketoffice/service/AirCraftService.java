@@ -40,9 +40,6 @@ public class AirCraftService {
     private Aircraft getAircraft(String name, int busSeatAmount, int ecoSeatAmount) {
         Aircraft aircraft = new Aircraft();
         aircraft.setName(name);
-        /*Map<String, AircraftSeatAmount> seatNumberMap = new HashMap<>();
-        seatNumberMap.put(SeatType.BUSINESS + "", new AircraftSeatAmount(busSeatAmount));
-        seatNumberMap.put(SeatType.ECONOMY + "", new AircraftSeatAmount(ecoSeatAmount));*/
         Map<SeatType, AircraftSeatAmount> seatNumberMap = new HashMap<>();
         seatNumberMap.put(SeatType.BUSINESS, new AircraftSeatAmount(busSeatAmount));
         seatNumberMap.put(SeatType.ECONOMY, new AircraftSeatAmount(ecoSeatAmount));

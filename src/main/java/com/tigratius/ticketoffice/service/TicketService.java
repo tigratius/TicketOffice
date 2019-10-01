@@ -34,26 +34,15 @@ public class TicketService {
         Flight flight = flightRepository.getById(flightId);
         Passenger passenger = passengerRepository.getById(passengerId);
 
-        /*if (!flight.occupySeat(seatType))
-            throw new Exception(noSeatsMessage);*/
-
         if (!canOccupySeat(seatType, flightId))
             throw new Exception(noSeatsMessage);
 
         Ticket ticket = getTicket(flight, passenger, seatType, price);
 
-        /*flightRepository.update(flight);*/
         ticketRepository.add(ticket);
     }
 
     public void returnTicket(Long ticketId) throws Exception {
-
-        /*Ticket ticket = ticketRepository.getById(ticketId);
-        Flight flight = ticket.getFlight();*/
-
-        /*flight.reassignSeat(ticket.getSeatType());*/
-
-        /*flightRepository.update(flight);*/
         ticketRepository.delete(ticketId);
     }
 
@@ -62,16 +51,12 @@ public class TicketService {
         Flight flight = flightRepository.getById(flightId);
         Passenger passenger = passengerRepository.getById(passengerId);
 
-       /* if (!flight.occupySeat(seatType))
-            throw new Exception(noSeatsMessage);*/
-
         if (!canOccupySeat(seatType, flightId))
             throw new Exception(noSeatsMessage);
 
         Ticket ticket = getTicket(flight, passenger, seatType, price);
         ticket.setId(id);
 
-        /*flightRepository.update(flight);*/
         ticketRepository.update(ticket);
     }
 
@@ -133,10 +118,10 @@ public class TicketService {
         int seatsAmount =  flight.getAircraft().getNumberSeatsBySeatType(seatType);
         int occupiedSeats = getOccupiedSeatsAmount(seatType, flightId);
 
-        System.out.println("***");
+        /*System.out.println("***");
         System.out.println("seatsAmount = " + seatsAmount);
         System.out.println("occupiedSeats = " + occupiedSeats);
-        System.out.println("***");
+        System.out.println("***");*/
 
         return occupiedSeats < seatsAmount;
     }

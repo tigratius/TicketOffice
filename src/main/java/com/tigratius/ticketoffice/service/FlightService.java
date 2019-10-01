@@ -4,13 +4,9 @@ import com.tigratius.ticketoffice.model.*;
 import com.tigratius.ticketoffice.repository.AircraftRepository;
 import com.tigratius.ticketoffice.repository.FlightRepository;
 import com.tigratius.ticketoffice.repository.RouteRepository;
-import com.tigratius.ticketoffice.repository.TicketRepository;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FlightService {
 

@@ -39,37 +39,11 @@ public class JavaHibernateCityRepositoryImpl extends HibernateBaseRepository<Cit
 
     @Override
     public void update(City item) {
-        /*Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.update(item);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
         super.update(item);
     }
 
     @Override
     public void add(City item) {
-        /*Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.save(item);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
         super.add(item);
     }
 

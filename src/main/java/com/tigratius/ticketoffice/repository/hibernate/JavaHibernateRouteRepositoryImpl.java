@@ -40,37 +40,11 @@ public class JavaHibernateRouteRepositoryImpl extends HibernateBaseRepository<Ro
 
     @Override
     public void update(Route item) {
-        /*Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.update(item);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
         super.update(item);
     }
 
     @Override
     public void add(Route item) {
-       /* Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.save(item);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
        super.add(item);
     }
 

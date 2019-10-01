@@ -40,22 +40,22 @@ public class ConsoleRunner {
     public ConsoleRunner() {
         try {
             //create repo using jdbc
-            Connection connection = DbUtil.getConnection();
+            /*Connection connection = DbUtil.getConnection();
             CityRepository cityRepository = new JavaJDBCCityRepositoryImpl(connection);
             AircraftRepository aircraftRepository = new JavaJDBCAirCraftRepositoryImpl(connection);
             PassengerRepository passengerRepository = new JavaJDBCPassengerRepositoryImpl(connection);
             RouteRepository routeRepository = new JavaJDBCRouteRepositoryImpl(connection, cityRepository);
             FlightRepository flightRepository = new JavaJDBCFlightRepositoryImpl(connection, aircraftRepository, routeRepository);
-            TicketRepository ticketRepository = new JavaJDBCTicketRepositoryImpl(connection, flightRepository, passengerRepository);
+            TicketRepository ticketRepository = new JavaJDBCTicketRepositoryImpl(connection, flightRepository, passengerRepository);*/
 
             //create repo using hibernate
-            /*SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             CityRepository cityRepository = new JavaHibernateCityRepositoryImpl(sessionFactory);
             AircraftRepository aircraftRepository = new JavaHibernateAircraftRepositoryImpl(sessionFactory);
             PassengerRepository passengerRepository = new JavaHibernatePassengerRepositoryImpl(sessionFactory);
             RouteRepository routeRepository = new JavaHibernateRouteRepositoryImpl(sessionFactory);
             FlightRepository flightRepository = new JavaHibernateFlightRepositoryImpl(sessionFactory);
-            TicketRepository ticketRepository = new JavaHibernateTicketRepositoryImpl(sessionFactory);*/
+            TicketRepository ticketRepository = new JavaHibernateTicketRepositoryImpl(sessionFactory);
 
             //create services
             FlightService flightService = new FlightService(flightRepository, aircraftRepository, routeRepository);
@@ -123,9 +123,9 @@ public class ConsoleRunner {
         } while (!isExit);
 
         try {
-            DbUtil.getConnection().close();
-            /*HibernateUtil.getSessionFactory().close();*/
-        } catch (SQLException | HibernateException e) {
+            /*DbUtil.getConnection().close();*/
+            HibernateUtil.getSessionFactory().close();
+        } catch (/*SQLException |*/ HibernateException e) {
             e.printStackTrace();
         }
     }

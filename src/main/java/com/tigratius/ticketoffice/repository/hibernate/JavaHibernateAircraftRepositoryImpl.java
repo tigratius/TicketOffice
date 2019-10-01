@@ -39,41 +39,11 @@ public class JavaHibernateAircraftRepositoryImpl extends HibernateBaseRepository
 
     @Override
     public void update(Aircraft item) {
-        /*Session session = null;
-        Transaction tx = null;
-        try {
-            session = sessionFactory.openSession();
-            tx = session.beginTransaction();
-            session.update(item);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
         super.update(item);
     }
 
     @Override
     public void add(Aircraft item) {
-        /*Session session = null;
-        Transaction tx = null;
-        try {
-            session = sessionFactory.openSession();
-            tx = session.beginTransaction();
-            session.save(item);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
         super.add(item);
     }
 

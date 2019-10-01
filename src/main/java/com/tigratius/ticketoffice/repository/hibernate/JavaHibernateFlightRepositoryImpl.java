@@ -42,41 +42,11 @@ public class JavaHibernateFlightRepositoryImpl extends HibernateBaseRepository<F
 
     @Override
     public void update(Flight item) {
-       /* Session session = null;
-        Transaction tx = null;
-        try {
-            session = sessionFactory.openSession();
-            tx = session.beginTransaction();
-            session.update(item);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
        super.update(item);
     }
 
     @Override
     public void add(Flight item) {
-        /*Session session = null;
-        Transaction tx = null;
-        try {
-            session = sessionFactory.openSession();
-            tx = session.beginTransaction();
-            session.save(item);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }*/
         super.add(item);
     }
 
